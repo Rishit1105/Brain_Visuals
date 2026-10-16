@@ -1,1 +1,150 @@
-{"shape": [104, 128, 108], "affine": [[1.474926233291626, 0.0, 0.0, -75.76253509521484], [0.0, 1.474926233291626, 0.0, -110.76253509521484], [0.0, 0.0, 1.474926233291626, -71.76253509521484], [0.0, 0.0, 0.0, 1.0]], "spacing": [1.474926233291626, 1.474926233291626, 1.474926233291626], "regions": {"WT": {"voxel_count": 19506, "volume_ml": 62.586277335973904}, "TC": {"voxel_count": 6445, "volume_ml": 20.679204215643995}, "ET": {"voxel_count": 1847, "volume_ml": 5.926220354739249}}, "demo": true, "name": "MNI152 \u00b7 Reference anatomy", "description": "Public reference MRI with synthetic teaching regions. No segmentation model was run.", "source": "https://github.com/niivue/niivue/tree/main/packages/niivue/demos/images", "anatomy_note": "Illustrative composite: ICBM152 left cortical reference with mirrored right hemisphere, plus MRI-derived lower brain. Not a patient-specific surface or verified atlas registration."}
+{
+  "shape": [
+    161,
+    161,
+    104
+  ],
+  "affine": [
+    [
+      1.5,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      1.5,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      1.5,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "spacing": [
+    1.5,
+    1.5,
+    1.5
+  ],
+  "original_shape": [
+    240,
+    240,
+    155
+  ],
+  "original_affine": [
+    [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      1.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "name": "MSD \u00b7 BRATS_457",
+  "demo": true,
+  "description": "Public four-sequence research MRI. Precomputed MONAI prediction; no live model execution in the hosted viewer.",
+  "regions": {
+    "WT": {
+      "voxel_count": 65219,
+      "voxel_volume_mm3": 1.0,
+      "volume_ml": 65.219
+    },
+    "TC": {
+      "voxel_count": 2887,
+      "voxel_volume_mm3": 1.0,
+      "volume_ml": 2.887
+    },
+    "ET": {
+      "voxel_count": 2443,
+      "voxel_volume_mm3": 1.0,
+      "volume_ml": 2.443
+    }
+  },
+  "expert": null,
+  "metrics": null,
+  "model": {
+    "name": "MONAI brats_mri_segmentation",
+    "bundle_version": "0.5.4",
+    "architecture": "SegResNet",
+    "licence": "Apache-2.0",
+    "revision": "370f7f9d062745fbac445e7fe6d6616d35df04ec",
+    "checkpoint_sha256": "860ccb3f1c21c99d0410ad8a1ac4ef6b8fab60cec0a503b0ba42675741a750ae",
+    "device": "cpu",
+    "torch": "2.5.1+cpu",
+    "preprocessing": "RAS+; 1mm world-space linear resampling; per-channel nonzero z-score; T1Gd,T1,T2,FLAIR",
+    "inference": "128 cubed sliding window, overlap 0.5, sigmoid > 0.5; ET > TC > WT precedence; nearest-neighbour original-grid restoration",
+    "uncertainty": "Not measured",
+    "training_data": "BraTS 2018; pretraining/evaluation overlap unverified"
+  },
+  "warnings": [
+    "PRECOMPUTED PUBLIC DEMONSTRATION: the hosted viewer serves this named research case and its precomputed prediction. Uploaded studies are processed only by the local service.",
+    "Anatomical and skull-stripping checks are heuristics; they cannot certify that this is a valid brain MRI."
+  ],
+  "input_sha256": {
+    "FLAIR": "8232bdc9983f7704ee3d3fcfe0c54a6a6f40bd9a447078a6ab3adb8d05399065",
+    "T1": "6c0a73fafca613e23eff3cb861992097e36360052a992641aba2070394ed8f56",
+    "T1Gd": "10eb61bf5adbdcc2f0ba41ac459d13680a9a5a47dc9734431e339bdae8d0d25e",
+    "T2": "226c89415ab56fc30bd3649b7cea8d85c029c9e85f854907ea5991f02e8dfc14"
+  },
+  "expert_sha256": null,
+  "code_commit": "21580cf92d04848876247f77e1deca565c6ea8b4",
+  "timestamp": "2026-10-16T13:49:04.353205+00:00",
+  "runtime_seconds": 72.48881220002659,
+  "disclaimer": "Research and teaching only. Never use model output as a diagnosis.",
+  "limitations": [
+    "No clinical validation.",
+    "No project-level held-out evaluation yet.",
+    "No uncertainty estimate.",
+    "Target T4 two-minute budget not benchmarked.",
+    "Input sanity checks cannot certify brain anatomy."
+  ],
+  "precomputed": true,
+  "anatomy_note": "Brain surface extracted from this study. All four sequences are acquired channels from the same public study.",
+  "sequences": [
+    "T1",
+    "T1Gd",
+    "T2",
+    "FLAIR"
+  ],
+  "focus_voxel": [
+    53,
+    85,
+    36
+  ],
+  "source": "https://msd-for-monai.s3-us-west-2.amazonaws.com/Task01_BrainTumour.tar",
+  "dataset": "Medical Segmentation Decathlon Task01 BrainTumour",
+  "dataset_licence": "CC-BY-SA 4.0",
+  "channel_mapping": {
+    "0": "FLAIR",
+    "1": "T1",
+    "2": "T1Gd",
+    "3": "T2"
+  },
+  "data_credit": "Medical Segmentation Decathlon, Simpson et al. (2019), Antonelli et al. (2022). Derived from BraTS 2016\u20132017; pretraining overlap unverified."
+}

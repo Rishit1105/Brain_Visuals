@@ -1,0 +1,154 @@
+<!doctype html><html><head><meta charset="utf-8"><title>NeuroSeg research report</title><style>body{font:14px system-ui;max-width:880px;margin:40px auto;padding:20px;color:#182a42}p{line-height:1.7}table{width:100%;border-collapse:collapse}td,th{padding:10px;text-align:left;border-bottom:1px solid #ccc}pre{white-space:pre-wrap;font-size:11px;background:#f0f4f8;padding:18px;overflow-wrap:anywhere}.note{background:#edf2f7;padding:16px}@media print{button{display:none}}</style></head><body><h1>NeuroSeg research report</h1><p class="note"><b>Research and teaching only. Never use model output as a diagnosis.</b></p><p>Suspected tumour regions predicted by the model. Estimated volumes below do not establish a diagnosis.</p><h2>Estimated volumes</h2><table><tr><th>Region</th><th>Voxels</th><th>mm³ per voxel</th><th>mL</th></tr><tr><td>WT</td><td>65,219</td><td>1.000000</td><td>65.219</td></tr><tr><td>TC</td><td>2,887</td><td>1.000000</td><td>2.887</td></tr><tr><td>ET</td><td>2,443</td><td>1.000000</td><td>2.443</td></tr></table><p>Volume = voxel count × |det(original affine 3×3)| / 1,000.</p><h2>Expert comparison</h2><pre>{
+  &quot;expert_volumes&quot;: null,
+  &quot;per_case_metrics&quot;: null,
+  &quot;empty_mask_convention&quot;: &quot;Dice=1 when both empty; sensitivity undefined (null) when reference empty&quot;
+}</pre><h2>Provenance, warnings and limitations</h2><pre>{
+  &quot;shape&quot;: [
+    161,
+    161,
+    104
+  ],
+  &quot;affine&quot;: [
+    [
+      1.5,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      1.5,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      1.5,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  &quot;spacing&quot;: [
+    1.5,
+    1.5,
+    1.5
+  ],
+  &quot;original_shape&quot;: [
+    240,
+    240,
+    155
+  ],
+  &quot;original_affine&quot;: [
+    [
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      1.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  &quot;name&quot;: &quot;MSD \u00b7 BRATS_457&quot;,
+  &quot;demo&quot;: true,
+  &quot;description&quot;: &quot;Public four-sequence research MRI. Precomputed MONAI prediction; no live model execution in the hosted viewer.&quot;,
+  &quot;regions&quot;: {
+    &quot;WT&quot;: {
+      &quot;voxel_count&quot;: 65219,
+      &quot;voxel_volume_mm3&quot;: 1.0,
+      &quot;volume_ml&quot;: 65.219
+    },
+    &quot;TC&quot;: {
+      &quot;voxel_count&quot;: 2887,
+      &quot;voxel_volume_mm3&quot;: 1.0,
+      &quot;volume_ml&quot;: 2.887
+    },
+    &quot;ET&quot;: {
+      &quot;voxel_count&quot;: 2443,
+      &quot;voxel_volume_mm3&quot;: 1.0,
+      &quot;volume_ml&quot;: 2.443
+    }
+  },
+  &quot;expert&quot;: null,
+  &quot;metrics&quot;: null,
+  &quot;model&quot;: {
+    &quot;name&quot;: &quot;MONAI brats_mri_segmentation&quot;,
+    &quot;bundle_version&quot;: &quot;0.5.4&quot;,
+    &quot;architecture&quot;: &quot;SegResNet&quot;,
+    &quot;licence&quot;: &quot;Apache-2.0&quot;,
+    &quot;revision&quot;: &quot;370f7f9d062745fbac445e7fe6d6616d35df04ec&quot;,
+    &quot;checkpoint_sha256&quot;: &quot;860ccb3f1c21c99d0410ad8a1ac4ef6b8fab60cec0a503b0ba42675741a750ae&quot;,
+    &quot;device&quot;: &quot;cpu&quot;,
+    &quot;torch&quot;: &quot;2.5.1+cpu&quot;,
+    &quot;preprocessing&quot;: &quot;RAS+; 1mm world-space linear resampling; per-channel nonzero z-score; T1Gd,T1,T2,FLAIR&quot;,
+    &quot;inference&quot;: &quot;128 cubed sliding window, overlap 0.5, sigmoid &gt; 0.5; ET &gt; TC &gt; WT precedence; nearest-neighbour original-grid restoration&quot;,
+    &quot;uncertainty&quot;: &quot;Not measured&quot;,
+    &quot;training_data&quot;: &quot;BraTS 2018; pretraining/evaluation overlap unverified&quot;
+  },
+  &quot;warnings&quot;: [
+    &quot;PRECOMPUTED PUBLIC DEMONSTRATION: the hosted viewer serves this named research case and its precomputed prediction. Uploaded studies are processed only by the local service.&quot;,
+    &quot;Anatomical and skull-stripping checks are heuristics; they cannot certify that this is a valid brain MRI.&quot;
+  ],
+  &quot;input_sha256&quot;: {
+    &quot;FLAIR&quot;: &quot;8232bdc9983f7704ee3d3fcfe0c54a6a6f40bd9a447078a6ab3adb8d05399065&quot;,
+    &quot;T1&quot;: &quot;6c0a73fafca613e23eff3cb861992097e36360052a992641aba2070394ed8f56&quot;,
+    &quot;T1Gd&quot;: &quot;10eb61bf5adbdcc2f0ba41ac459d13680a9a5a47dc9734431e339bdae8d0d25e&quot;,
+    &quot;T2&quot;: &quot;226c89415ab56fc30bd3649b7cea8d85c029c9e85f854907ea5991f02e8dfc14&quot;
+  },
+  &quot;expert_sha256&quot;: null,
+  &quot;code_commit&quot;: &quot;21580cf92d04848876247f77e1deca565c6ea8b4&quot;,
+  &quot;timestamp&quot;: &quot;2026-10-16T13:49:04.353205+00:00&quot;,
+  &quot;runtime_seconds&quot;: 72.48881220002659,
+  &quot;disclaimer&quot;: &quot;Research and teaching only. Never use model output as a diagnosis.&quot;,
+  &quot;limitations&quot;: [
+    &quot;No clinical validation.&quot;,
+    &quot;No project-level held-out evaluation yet.&quot;,
+    &quot;No uncertainty estimate.&quot;,
+    &quot;Target T4 two-minute budget not benchmarked.&quot;,
+    &quot;Input sanity checks cannot certify brain anatomy.&quot;
+  ],
+  &quot;precomputed&quot;: true,
+  &quot;anatomy_note&quot;: &quot;Brain surface extracted from this study. All four sequences are acquired channels from the same public study.&quot;,
+  &quot;sequences&quot;: [
+    &quot;T1&quot;,
+    &quot;T1Gd&quot;,
+    &quot;T2&quot;,
+    &quot;FLAIR&quot;
+  ],
+  &quot;focus_voxel&quot;: [
+    53,
+    85,
+    36
+  ],
+  &quot;source&quot;: &quot;https://msd-for-monai.s3-us-west-2.amazonaws.com/Task01_BrainTumour.tar&quot;,
+  &quot;dataset&quot;: &quot;Medical Segmentation Decathlon Task01 BrainTumour&quot;,
+  &quot;dataset_licence&quot;: &quot;CC-BY-SA 4.0&quot;,
+  &quot;channel_mapping&quot;: {
+    &quot;0&quot;: &quot;FLAIR&quot;,
+    &quot;1&quot;: &quot;T1&quot;,
+    &quot;2&quot;: &quot;T1Gd&quot;,
+    &quot;3&quot;: &quot;T2&quot;
+  },
+  &quot;data_credit&quot;: &quot;Medical Segmentation Decathlon, Simpson et al. (2019), Antonelli et al. (2022). Derived from BraTS 2016\u20132017; pretraining overlap unverified.&quot;
+}</pre><button onclick="print()">Print / Save as PDF</button></body></html>
