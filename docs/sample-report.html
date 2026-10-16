@@ -1,0 +1,130 @@
+<!doctype html><html><head><meta charset="utf-8"><title>NeuroSeg research report</title><style>body{font:14px system-ui;max-width:880px;margin:40px auto;padding:20px;color:#182a42}p{line-height:1.7}table{width:100%;border-collapse:collapse}td,th{padding:10px;text-align:left;border-bottom:1px solid #ccc}pre{white-space:pre-wrap;font-size:11px;background:#f0f4f8;padding:18px;overflow-wrap:anywhere}.note{background:#edf2f7;padding:16px}@media print{button{display:none}}</style></head><body><h1>NeuroSeg research report</h1><p class="note"><b>Research and teaching only. Never use model output as a diagnosis.</b></p><p>Suspected tumour regions predicted by the model. Estimated volumes below do not establish a diagnosis.</p><h2>Estimated volumes</h2><table><tr><th>Region</th><th>Voxels</th><th>mm³ per voxel</th><th>mL</th></tr><tr><td>WT</td><td>6,550</td><td>15.625000</td><td>102.344</td></tr><tr><td>TC</td><td>2,885</td><td>15.625000</td><td>45.078</td></tr><tr><td>ET</td><td>1,847</td><td>15.625000</td><td>28.859</td></tr></table><p>Volume = voxel count × |det(original affine 3×3)| / 1,000.</p><h2>Expert comparison</h2><pre>{
+  &quot;expert_volumes&quot;: null,
+  &quot;per_case_metrics&quot;: null,
+  &quot;empty_mask_convention&quot;: &quot;Dice=1 when both empty; sensitivity undefined (null) when reference empty&quot;
+}</pre><h2>Provenance, warnings and limitations</h2><pre>{
+  &quot;shape&quot;: [
+    66,
+    66,
+    66
+  ],
+  &quot;affine&quot;: [
+    [
+      1.5,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      1.5,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      1.5,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  &quot;spacing&quot;: [
+    1.5,
+    1.5,
+    1.5
+  ],
+  &quot;original_shape&quot;: [
+    40,
+    40,
+    40
+  ],
+  &quot;original_affine&quot;: [
+    [
+      2.5,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      2.5,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      2.5,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  &quot;name&quot;: &quot;SYNTHETIC PHANTOM SOFTWARE SMOKE TEST&quot;,
+  &quot;demo&quot;: false,
+  &quot;description&quot;: &quot;Artificial four-channel phantom; not patient anatomy or medical accuracy evidence.&quot;,
+  &quot;regions&quot;: {
+    &quot;WT&quot;: {
+      &quot;voxel_count&quot;: 6550,
+      &quot;voxel_volume_mm3&quot;: 15.625000000000002,
+      &quot;volume_ml&quot;: 102.34375000000001
+    },
+    &quot;TC&quot;: {
+      &quot;voxel_count&quot;: 2885,
+      &quot;voxel_volume_mm3&quot;: 15.625000000000002,
+      &quot;volume_ml&quot;: 45.07812500000001
+    },
+    &quot;ET&quot;: {
+      &quot;voxel_count&quot;: 1847,
+      &quot;voxel_volume_mm3&quot;: 15.625000000000002,
+      &quot;volume_ml&quot;: 28.859375000000004
+    }
+  },
+  &quot;expert&quot;: null,
+  &quot;metrics&quot;: null,
+  &quot;model&quot;: {
+    &quot;name&quot;: &quot;MONAI brats_mri_segmentation&quot;,
+    &quot;architecture&quot;: &quot;SegResNet&quot;,
+    &quot;licence&quot;: &quot;Apache-2.0&quot;,
+    &quot;revision&quot;: &quot;370f7f9d062745fbac445e7fe6d6616d35df04ec&quot;,
+    &quot;checkpoint_sha256&quot;: &quot;860ccb3f1c21c99d0410ad8a1ac4ef6b8fab60cec0a503b0ba42675741a750ae&quot;,
+    &quot;device&quot;: &quot;cpu&quot;,
+    &quot;torch&quot;: &quot;2.5.1+cpu&quot;,
+    &quot;preprocessing&quot;: &quot;RAS+; 1mm world-space linear resampling; per-channel nonzero z-score; T1Gd,T1,T2,FLAIR&quot;,
+    &quot;inference&quot;: &quot;128 cubed sliding window, overlap 0.5, sigmoid &gt; 0.5; ET &gt; TC &gt; WT precedence; nearest-neighbour original-grid restoration&quot;,
+    &quot;uncertainty&quot;: &quot;Not measured&quot;,
+    &quot;training_data&quot;: &quot;BraTS 2018; pretraining/evaluation overlap unverified&quot;
+  },
+  &quot;warnings&quot;: [
+    &quot;SYNTHETIC PHANTOM: this report tests software only. Region values are model outputs on artificial input and have no medical interpretation.&quot;,
+    &quot;Anatomical and skull-stripping checks are heuristics; they cannot certify that this is a valid brain MRI.&quot;
+  ],
+  &quot;input_sha256&quot;: {
+    &quot;T1&quot;: &quot;df22456d7ae207ca7a0ea24f530cc376bd63a0f49d06b049b9bb0e36002f43bd&quot;,
+    &quot;T1Gd&quot;: &quot;6b6b874f4c7d08d3085a51ad82da53ccd16a44d3e8f959084e0da653547d38b1&quot;,
+    &quot;T2&quot;: &quot;1c7c75f21373734975a9b4ba37b91074b804adb148d2173e0238aa1b9e631c75&quot;,
+    &quot;FLAIR&quot;: &quot;b57d6411ef2d17ec8bfa0d29896143ef20e0338fc16c16f0ad50e884fcdb336e&quot;
+  },
+  &quot;expert_sha256&quot;: null,
+  &quot;code_commit&quot;: &quot;uncommitted-local-source&quot;,
+  &quot;timestamp&quot;: &quot;2026-10-16T12:38:26.815712+00:00&quot;,
+  &quot;runtime_seconds&quot;: 13.524198699975386,
+  &quot;disclaimer&quot;: &quot;Research and teaching only. Never use model output as a diagnosis.&quot;,
+  &quot;limitations&quot;: [
+    &quot;No clinical validation.&quot;,
+    &quot;No project-level held-out evaluation yet.&quot;,
+    &quot;No uncertainty estimate.&quot;,
+    &quot;Target T4 two-minute budget not benchmarked.&quot;,
+    &quot;Input sanity checks cannot certify brain anatomy.&quot;
+  ]
+}</pre><button onclick="print()">Print / Save as PDF</button></body></html>

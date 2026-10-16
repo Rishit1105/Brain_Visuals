@@ -1,0 +1,16 @@
+{
+  "pretraining_overlap": "Unverified; replace after auditing model training patient IDs",
+  "training_patient_ids": [],
+  "cases": [
+    {
+      "patient_id": "REPLACE_WITH_APPROVED_PATIENT_ID",
+      "modalities": {
+        "T1": "data/case_t1.nii.gz",
+        "T1Gd": "data/case_t1ce.nii.gz",
+        "T2": "data/case_t2.nii.gz",
+        "FLAIR": "data/case_flair.nii.gz"
+      },
+      "expert": "data/case_seg.nii.gz"
+    }
+  ]
+}
